@@ -6,6 +6,7 @@ const { connect } = require('./src/utils/db')
 
 //import paths
 //const usersRoute = require('./repaso/src/routes/users')
+const postsRoute = require('./src/routes/posts')
 connect()
 //app.use(express.json()) //middleware, modifica el request, va arriba de mis endpoints/rutas porque los modifica
 
@@ -13,6 +14,7 @@ app.get('/', (req, res) => { //endpoint , sirve para verificar que el servidor e
     res.send({ msg: 'Home' }) //mensaje de tipo JSON
 })
 
+app.use('/posts', postsRoute)
 //app.use('/users', usersRoute) // configuramos los path que agregamos al router en nuestro recurso usuarios
 
 app.listen(port, () => { //inicializamos el hilo de ejecución
