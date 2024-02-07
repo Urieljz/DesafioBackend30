@@ -12,8 +12,25 @@ router.get('/', async (req, res) => {
         //console.log(posts)
         res.send({ msg: "All Posts", data: posts })
     } catch (error) {
-        res.status(400).send({ msg: "can't get users", error: error }) 
-    }  
+        res.status(400).send({ msg: "can't get users", error: error })
+    }
+})
+
+// create a new post
+router.post('/', async (req, res) => {
+    try {
+        const newPost = req.body
+        // console.log('newPost ', newPost);
+        const post = await Posts.create(newPost)
+        // console.log('post ', post);
+        await post.save()
+
+
+        res.status(201).send({ msg: "Post created", data: post })
+    } catch (error) {
+        console.log('error ', error);
+        res.status(400).send({ msg: "can't create post", error: error })
+    }
 })
 
 module.exports = router
