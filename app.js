@@ -8,7 +8,7 @@ const { connect } = require('./src/utils/db')
 //const usersRoute = require('./repaso/src/routes/users')
 const postsRoute = require('./src/routes/posts')
 connect()
-//app.use(express.json()) //middleware, modifica el request, va arriba de mis endpoints/rutas porque los modifica
+app.use(express.json()) //middleware, modifica el request, va arriba de mis endpoints/rutas porque los modifica
 
 app.get('/', (req, res) => { //endpoint , sirve para verificar que el servidor esta funcionando
     res.send({ msg: 'Home' }) //mensaje de tipo JSON
