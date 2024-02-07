@@ -15,6 +15,23 @@ router.get('/', async (req, res) => {
         res.status(400).send({ msg: "can't get users", error: error })
     }
 })
+//GetById
+router.get('/:id', async (req, res) => {
+
+    const {id} = req.params
+    try {
+     
+      const postId = await Posts.findById(id)
+      res.send({ msg:'post', data: postId})
+      
+    } catch (error) {
+      res.status(400).send({msg:"post not found", data:{}})
+    }
+  
+})
+
+
+//==============
 
 // create a new post
 router.post('/', async (req, res) => {
