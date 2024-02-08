@@ -62,7 +62,7 @@ router.put('/:id', async(req, res) =>{
     } catch (error) {
       res.status(400).send({msg:"user not found", data:{}})
     }
-  //{titulo:titulo, contenido:contenido, postImage:postImage, hashtags:hashtags, date:date}
+  
   
   })
 
