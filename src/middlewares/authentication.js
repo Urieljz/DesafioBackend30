@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
-const jwt_sign = process.env.JWT_SIGN;
+const JWT_SIGN = process.env.JWT_SIGN;
 const User = require('../models/users');
 
 function createJWT(data) {
-    return jwt.sign(data, jwt_sign, { expiresIn: '1h' });
+    return jwt.sign(data, JWT_SIGN, { expiresIn: '1h' });
 }
 
 function verifyJWT(req, res, next) {
@@ -15,7 +15,7 @@ function verifyJWT(req, res, next) {
     }
 
     token = token.split(' ')[1];
-    jwt.verify(token, jwt_sign, async (err, decoded) => {
+    jwt.verify(token, JWT_SIGN, async (err, decoded) => {
         if (err) {
             return res.status(401).send({ msg: 'Invalid token' });
         }
@@ -23,7 +23,7 @@ function verifyJWT(req, res, next) {
         if (decoded.exp < dateNow.getTime() / 1000) {
             return res.status(401).send({ msg: 'Expired token' });
         } else {
-            req.user = await User.findById(decoded.id);
+            req.user = await User.findById(decoded._id);
             next();
         }
     });
