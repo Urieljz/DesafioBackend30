@@ -63,16 +63,8 @@ router.delete('/:id', async (req, res) => {
 })
 
 
-router.post('/', async (req,res)=>{
-    try {
-        const newUser = req.body
-        const user = await User.create(newUser)
-        await user.save()
-        res.status(201).send({msg:"user created", data: user})
 
-    } catch (error) {
-    res.status(400).send({msg:"user not created",error:error})
-    }
-})
+
+
 
 module.exports = router
