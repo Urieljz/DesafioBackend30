@@ -50,6 +50,21 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.put('/:id', async(req, res) =>{
+    const {id} = req.params
+    let actualization = req.body.contenido
+    try {
+     
+      const updatePost = await Posts.findByIdAndUpdate({ _id: id },{$set:{contenido: actualization}})
+     res.send({msg:'Post update', data: updatePost})
+      
+    } catch (error) {
+      res.status(400).send({msg:"user not found", data:{}})
+    }
+  
+  
+  })
+
 router.delete('/:id', async (req, res) => {
     const {id} = req.params
     try {
