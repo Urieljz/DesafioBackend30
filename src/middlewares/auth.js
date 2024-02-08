@@ -15,8 +15,10 @@ router.post("/login", async (req, res) => {
     }
     if (user.password != bodyCredentials.password) {
       res.status(401).send({ msg: "Contraseña incorrecta" });
+    } else {
+      const token = createJWT({ _id: user._id });
+      res.status(201).send({ msg: "Login successful", data: token });
     }
-    const token = createJWT({ _id: user._id });
   } catch (err) {
     res.status(400).send({ msg: "Login inválido", error: err });
   }
