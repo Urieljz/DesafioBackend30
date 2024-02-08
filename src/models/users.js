@@ -5,11 +5,11 @@ const usersSchema = new mongoose.Schema({
         type: String,
         required: true,        
     },
-    mail: {
+    email: {
         type: String,
         unique: true,
         required: true,
-        match:[],
+        //match:[],
     },
     password: {
         type: String,
@@ -17,7 +17,7 @@ const usersSchema = new mongoose.Schema({
     },
     bio: {
         type: String,
-        requered: true,
+        required: true,
     },
     joined: {
         type: String,
