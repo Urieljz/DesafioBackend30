@@ -56,7 +56,7 @@ router.put('/:id', async(req, res) =>{
     let actualization = req.body
     try {
      
-      const updatePost = await Posts.findByIdAndUpdate({ _id: id },{$set:actualization})
+      const updatePost = await Posts.findByIdAndUpdate({ _id: id },{$set:actualization},{ new: true })
      res.send({msg:'Post update', data: updatePost})
       
     } catch (error) {
