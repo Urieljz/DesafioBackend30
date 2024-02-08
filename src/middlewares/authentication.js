@@ -14,5 +14,19 @@ function verifyJWT(req, res, next) {
         return res.status(401).send({ msg: 'Login required' });
     }
 
-    token = token.replace('Bearer ', '');
+    token = token.split(' ')[1];
+    jwt.verify(token, jwt_sign, async (err, decoded) => {
+        if (err) {
+            return res.status(401).send({ msg: 'Invalid token' });
+        }
+
+        if (decoded.exp < dateNow.getTime() / 1000) {
+            return res.status(401).send({ msg: 'Expired token' });
+        } else {
+            req.user = await User.findById(decoded.id);
+            next();
+        }
+    });
 }
+
+module.exports = { createJWT, verifyJWT };
