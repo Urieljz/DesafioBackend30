@@ -52,16 +52,17 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async(req, res) =>{
     const {id} = req.params
-    let actualization = req.body.contenido
+    
+    let actualization = req.body
     try {
      
-      const updatePost = await Posts.findByIdAndUpdate({ _id: id },{$set:{contenido: actualization}})
+      const updatePost = await Posts.findByIdAndUpdate({ _id: id },{$set:actualization})
      res.send({msg:'Post update', data: updatePost})
       
     } catch (error) {
       res.status(400).send({msg:"user not found", data:{}})
     }
-  
+  //{titulo:titulo, contenido:contenido, postImage:postImage, hashtags:hashtags, date:date}
   
   })
 
