@@ -11,13 +11,13 @@ router.post("/login", async (req, res) => {
       email: bodyCredentials.email,
     });
     if (!user) {
-      res.status(401).send({ msg: "Usuario no encontrado" });
+      return res.status(401).send({ msg: "Usuario no encontrado" });
     }
     if (user.password != bodyCredentials.password) {
-      res.status(401).send({ msg: "Contraseña incorrecta" });
+      return res.status(401).send({ msg: "Contraseña incorrecta" });
     } else {
       const token = createJWT({ _id: user._id });
-      res.status(201).send({ msg: "Login successful", data: token });
+      return res.status(201).send({ msg: "Login successful", data: token });
     }
   } catch (err) {
     res.status(400).send({ msg: "Login inválido", error: err });
