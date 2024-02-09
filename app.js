@@ -3,7 +3,9 @@ const express = require("express");
 const app = express(); //instancia del objeto (biblioteca express)
 const port = 3001;
 const { connect } = require("./src/utils/db");
+const cors = require("cors");
 
+app.use(cors());
 //import paths
 const usersRoute = require("./src/routes/users");
 const postsRoute = require("./src/routes/posts");
