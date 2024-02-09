@@ -14,9 +14,10 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+      
   try {
     const newUser = req.body;
-    newUser.password = await User.encryptPassword(newUser.password);
+    newUser.password = await Users.encryptPassword(newUser.password);
     const user = await Users.create(newUser);
     await user.save();
     res.status(201).send({ msg: "user created", data: user });
