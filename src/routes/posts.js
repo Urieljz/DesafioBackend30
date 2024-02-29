@@ -8,7 +8,7 @@ const Posts = require("../models/posts");
 
 router.get("/", async (req, res) => {
   try {
-    const posts = await Posts.find();
+    const posts = await Posts.find().populate('user')
     //console.log(posts)
     res.send({ msg: "All Posts", data: posts });
   } catch (error) {
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const postId = await Posts.findById(id);
+    const postId = await Posts.findById(id).populate('user')
     res.send({ msg: "post", data: postId });
   } catch (error) {
     res.status(400).send({ msg: "post not found", data: {} });
@@ -32,7 +32,8 @@ router.use(verifyJWT);
 // create a new post
 router.post("/", async (req, res) => {
   try {
-    const newPost = req.body;
+    let newPost = req.body;
+    newPost.user = req.user._id;
     // console.log('newPost ', newPost);
     const post = await Posts.create(newPost);
     // console.log('post ', post);

@@ -21,10 +21,10 @@ const postsSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
-    // username: {
-    //     type: Schema.Types.ObjectId,
-    //     ref:'user'
-    // },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    },
     // relevant: {
     //     type: Boolean,
     //     required: false,
